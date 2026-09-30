@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>西澳 10 天壯遊 ｜ Ningaloo Reef & Coral Coast</title>
+  <title>西澳 10 天旅行 ｜ Ningaloo Reef & Coral Coast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   
   <style>
-    /* --- 嚴格套用指定色票 --- */
     :root {
       --c-cream: #f4f1de;
       --c-rust: #e07a5f;
@@ -93,7 +92,83 @@
     .tab-content.active { display: block; }
 
     /* =========================================
-       1. Apple Calendar 風格 (微透質感)
+       1. 路線總覽
+       ========================================= */
+    .overview-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(61, 64, 91, 0.04);
+      display: flex;
+      gap: 40px;
+    }
+
+    .map-container {
+      flex: 1;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(244, 241, 222, 0.3);
+    }
+
+    .map-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .route-timeline {
+      flex: 1;
+    }
+
+    .route-timeline h3 {
+      font-size: 1.2rem;
+      color: var(--c-navy);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--c-sand);
+      display: inline-block;
+    }
+
+    .r-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .r-step::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 20px;
+      bottom: -20px;
+      width: 2px;
+      background: var(--border-light);
+    }
+    .r-step:last-child::before { display: none; }
+
+    .r-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--c-sage);
+      margin-top: 4px;
+      margin-right: 15px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .r-dot.flight { background: var(--c-rust); }
+    .r-dot.city { background: var(--c-navy); }
+
+    .r-content strong { display: block; color: var(--c-navy); font-weight: 600; font-size: 1.05rem; }
+    .r-content span { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* =========================================
+       2. 區塊時間軸
        ========================================= */
     .calendar-view {
       background: var(--bg-card);
@@ -130,7 +205,6 @@
     .time-label { height: 50px; text-align: right; padding-right: 8px; font-size: 0.7rem; color: var(--text-muted); position: relative; top: -9px; }
     .cal-day-col { width: 160px; flex-shrink: 0; border-right: 1px solid var(--border-light); position: relative; }
 
-    /* 行事曆事件微透質感設計 */
     .cal-event {
       position: absolute;
       left: 4px;
@@ -145,24 +219,15 @@
       border-left-width: 3px;
       border-left-style: solid;
     }
+    .cal-event strong { display: block; font-weight: 600; font-size: 0.8rem; margin-bottom: 2px; color: var(--c-navy); }
 
-    .cal-event strong {
-      display: block;
-      font-weight: 600;
-      font-size: 0.8rem;
-      margin-bottom: 2px;
-      color: var(--c-navy);
-    }
-
-    /* 顏色飽和度降低：使用 rgba 透明底 ＋ 實心左邊框 */
     .evt-flight { background: rgba(224, 122, 95, 0.15); border-left-color: var(--c-rust); } 
     .evt-water { background: rgba(129, 178, 154, 0.2); border-left-color: var(--c-sage); } 
     .evt-road { background: rgba(242, 204, 143, 0.3); border-left-color: #d89b4f; } 
     .evt-city { background: rgba(61, 64, 91, 0.1); border-left-color: var(--c-navy); } 
 
-
     /* =========================================
-       2. 每日行程 (完整版)
+       3. 完整行程與餐飲
        ========================================= */
     .list-view { display: flex; flex-direction: column; gap: 20px; }
     .list-card {
@@ -173,7 +238,6 @@
       overflow: hidden;
       box-shadow: 0 2px 10px rgba(61, 64, 91, 0.02);
     }
-
     .list-date-panel {
       background: rgba(244, 241, 222, 0.5);
       padding: 25px 20px;
@@ -198,13 +262,11 @@
     .event-desc span { font-size: 0.9rem; color: var(--text-muted); display: block; line-height: 1.5; }
     .event-meal { color: var(--c-rust); font-weight: 500; font-size: 0.85rem; margin-top: 4px; display: inline-block; background: rgba(224, 122, 95, 0.08); padding: 2px 6px; border-radius: 4px;}
 
-
     /* =========================================
-       3. 預算與注意事項
+       4. 預算與注意事項
        ========================================= */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
     .info-card { background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 10px; padding: 30px; }
-    
     .info-card h2 { font-size: 1.15rem; font-weight: 600; color: var(--c-navy); margin-bottom: 20px; border-bottom: 2px solid var(--c-sand); display: inline-block; padding-bottom: 4px; }
     
     .budget-table { width: 100%; border-collapse: collapse; }
@@ -223,6 +285,7 @@
 
     @media (max-width: 768px) {
       .header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .overview-card { flex-direction: column; padding: 20px; gap: 20px; }
       .list-card { flex-direction: column; }
       .list-date-panel { width: 100%; border-right: none; border-bottom: 1px solid var(--border-light); padding: 15px; flex-direction: row; gap: 12px; justify-content: flex-start;}
       .list-date-panel .day-num { margin-bottom: 0; }
@@ -236,21 +299,64 @@
 
   <div class="header">
     <div>
-      <h1>西澳海陸壯遊</h1>
+      <h1>西澳海陸專案</h1>
       <p>Ningaloo Reef & Coral Coast</p>
     </div>
     <p style="color: var(--text-muted); font-family: 'Outfit';">2027.04.24 — 05.04</p>
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(event, 'calendar')">區塊時間軸</button>
+    <button class="tab-btn active" onclick="switchTab(event, 'overview')">路線總覽</button>
+    <button class="tab-btn" onclick="switchTab(event, 'calendar')">區塊時間軸</button>
     <button class="tab-btn" onclick="switchTab(event, 'list')">完整行程與餐飲</button>
     <button class="tab-btn" onclick="switchTab(event, 'budget')">預算估算</button>
     <button class="tab-btn" onclick="switchTab(event, 'notes')">行前準備</button>
   </div>
 
-  <!-- ================= 1. Apple 行事曆 UI ================= -->
-  <div id="calendar" class="tab-content active calendar-view">
+  <!-- ================= 1. 路線總覽 ================= -->
+  <div id="overview" class="tab-content active">
+    <div class="overview-card">
+      <div class="map-container">
+        <img src="image_e147b7.png" alt="西澳自駕路線地圖">
+      </div>
+      <div class="route-timeline">
+        <h3>長途公路里程碑：一路向北</h3>
+        
+        <div class="r-step">
+          <div class="r-dot flight"></div>
+          <div class="r-content"><strong>TPE ➔ PER</strong><span>Day 1 | 酷航紅眼航班降落伯斯</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot"></div>
+          <div class="r-content"><strong>伯斯 (Perth) ➔ 卡爾巴里 (Kalbarri)</strong><span>Day 2 - Day 3 | 尖峰石陣與自然之窗</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot"></div>
+          <div class="r-content"><strong>卡爾巴里 ➔ 鯊魚灣 (Shark Bay)</strong><span>Day 4 | 貝殼沙灘與世界遺產</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot"></div>
+          <div class="r-content"><strong>鯊魚灣 ➔ 珊瑚灣 (Coral Bay)</strong><span>Day 5 | 寧靜海灣與珊瑚礁</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot"></div>
+          <div class="r-content"><strong>珊瑚灣 ➔ 埃克斯茅斯 (Exmouth)</strong><span>Day 6 - Day 8 | 海軍碼頭水肺與鯨鯊共游</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot flight"></div>
+          <div class="r-content"><strong>LEA ➔ PER</strong><span>Day 9 | 15:15 澳航國內線飛回伯斯</span></div>
+        </div>
+        <div class="r-step">
+          <div class="r-dot city"></div>
+          <div class="r-content"><strong>伯斯市區 ➔ TPE</strong><span>Day 10 | 22:20 酷航班機返台</span></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 2. 區塊時間軸 ================= -->
+  <div id="calendar" class="tab-content calendar-view">
     <div class="cal-header-row">
       <div class="cal-time-col"></div>
       <div class="cal-day-header"><div class="dow">Sat</div><div class="date">4/24</div></div>
@@ -277,13 +383,6 @@
         <div class="time-label">21:00</div><div class="time-label">22:00</div><div class="time-label">23:00</div>
       </div>
 
-      <!-- 分類與顏色對應： 
-           evt-flight (磚紅): 航班/交通 
-           evt-water (灰綠): 潛水/出海 
-           evt-road (柔黃): 自駕/陸地景點 
-           evt-city (深藍): 市區/用餐/住宿 
-      -->
-
       <!-- Day 1 (4/24) -->
       <div class="cal-day-col">
         <div class="cal-event evt-flight" style="top: 75px; height: 225px;"><strong>飛往新加坡</strong>01:35 - 06:00</div>
@@ -296,85 +395,84 @@
 
       <!-- Day 2 (4/25) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-flight" style="top: 400px; height: 100px;"><strong>國內線班機</strong>08:00飛 Exmouth</div>
-        <div class="cal-event evt-city" style="top: 550px; height: 75px;"><strong>機場取車 / 採買</strong>超市補給</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Whalers午餐</strong></div>
-        <div class="cal-event evt-water" style="top: 700px; height: 125px;"><strong>綠松石灣</strong>14:00 - 16:30 浮潛</div>
-        <div class="cal-event evt-city" style="top: 925px; height: 75px;"><strong>Froth酒廠晚餐</strong>18:30</div>
+        <div class="cal-event evt-road" style="top: 450px; height: 100px;"><strong>市區取車</strong>09:00 超市補給</div>
+        <div class="cal-event evt-road" style="top: 550px; height: 125px;"><strong>北上自駕</strong>往尖峰石陣</div>
+        <div class="cal-event evt-road" style="top: 700px; height: 100px;"><strong>Pinnacles</strong>14:00 荒原探索</div>
+        <div class="cal-event evt-road" style="top: 800px; height: 75px;"><strong>抵達 Cervantes</strong>16:00</div>
+        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Lobster Shack</strong>18:00 龍蝦晚餐</div>
       </div>
 
       <!-- Day 3 (4/26) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-water" style="top: 375px; height: 425px;"><strong>鯨鯊共游團</strong>07:30 集合<br>全日出海 (含午餐)</div>
-        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Mantaray's晚餐</strong>18:00 海鮮</div>
+        <div class="cal-event evt-road" style="top: 450px; height: 175px;"><strong>北上自駕</strong>09:00 往卡爾巴里</div>
+        <div class="cal-event evt-city" style="top: 650px; height: 50px;"><strong>Geraldton 午餐</strong>13:00</div>
+        <div class="cal-event evt-road" style="top: 725px; height: 75px;"><strong>粉紅湖</strong>14:30 赫特潟湖拍照</div>
+        <div class="cal-event evt-road" style="top: 850px; height: 75px;"><strong>海岸懸崖</strong>17:00 卡爾巴里日落</div>
+        <div class="cal-event evt-city" style="top: 950px; height: 75px;"><strong>Finlay's 晚餐</strong>19:00</div>
       </div>
 
       <!-- Day 4 (4/27) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-water" style="top: 400px; height: 200px;"><strong>Navy Pier 水肺</strong>08:00 - 12:00</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Blue Lips 炸魚</strong>快速午餐</div>
-        <div class="cal-event evt-road" style="top: 725px; height: 75px;"><strong>南下自駕</strong>14:30 往 Coral Bay</div>
-        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Bill's Bar晚餐</strong>18:00</div>
+        <div class="cal-event evt-road" style="top: 350px; height: 150px;"><strong>自然之窗</strong>07:00 卡爾巴里峽谷</div>
+        <div class="cal-event evt-road" style="top: 525px; height: 200px;"><strong>長途自駕</strong>10:30 往鯊魚灣</div>
+        <div class="cal-event evt-city" style="top: 650px; height: 50px;"><strong>公路午餐</strong>Billabong 休息站</div>
+        <div class="cal-event evt-road" style="top: 800px; height: 75px;"><strong>貝殼沙灘</strong>16:00 Shell Beach</div>
+        <div class="cal-event evt-city" style="top: 925px; height: 75px;"><strong>Monkey Mia 晚餐</strong>18:30</div>
       </div>
 
       <!-- Day 5 (4/28) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-water" style="top: 425px; height: 100px;"><strong>珊瑚灣沙灘浮潛</strong>08:30 - 10:30</div>
-        <div class="cal-event evt-city" style="top: 550px; height: 50px;"><strong>Coral Resort烘焙</strong>買肉派午餐</div>
-        <div class="cal-event evt-road" style="top: 600px; height: 300px;"><strong>長途自駕</strong>12:00 往鯊魚灣</div>
-        <div class="cal-event evt-city" style="top: 925px; height: 75px;"><strong>Boughshed晚餐</strong>18:30 度假村內</div>
+        <div class="cal-event evt-water" style="top: 375px; height: 100px;"><strong>野生海豚</strong>07:30 晨間互動</div>
+        <div class="cal-event evt-road" style="top: 500px; height: 250px;"><strong>長途自駕</strong>10:00 往 Coral Bay</div>
+        <div class="cal-event evt-city" style="top: 650px; height: 50px;"><strong>Carnarvon 午餐</strong>13:00 小鎮補給</div>
+        <div class="cal-event evt-water" style="top: 800px; height: 75px;"><strong>抵達珊瑚灣</strong>16:00 沙灘放鬆</div>
+        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Bill's Bar 晚餐</strong>18:00</div>
       </div>
 
       <!-- Day 6 (4/29) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-water" style="top: 375px; height: 100px;"><strong>野生海豚互動</strong>07:30 Monkey Mia</div>
-        <div class="cal-event evt-city" style="top: 475px; height: 50px;"><strong>度假村早午餐</strong></div>
-        <div class="cal-event evt-road" style="top: 525px; height: 125px;"><strong>南下自駕</strong>10:30 出發</div>
-        <div class="cal-event evt-city" style="top: 650px; height: 50px;"><strong>Billabong休息站</strong>簡單午餐</div>
-        <div class="cal-event evt-road" style="top: 750px; height: 100px;"><strong>懸崖步道看日落</strong>卡爾巴里海岸</div>
-        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Finlay's 晚餐</strong>18:00 知名海鮮</div>
+        <div class="cal-event evt-water" style="top: 450px; height: 100px;"><strong>沙灘浮潛</strong>09:00 珊瑚灣</div>
+        <div class="cal-event evt-city" style="top: 575px; height: 50px;"><strong>烘焙坊午餐</strong>11:30</div>
+        <div class="cal-event evt-road" style="top: 650px; height: 75px;"><strong>短途自駕</strong>13:00 往 Exmouth</div>
+        <div class="cal-event evt-water" style="top: 750px; height: 125px;"><strong>綠松石灣</strong>15:00 隨洋流放漂</div>
+        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Froth酒廠晚餐</strong>18:00</div>
       </div>
 
       <!-- Day 7 (4/30) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-road" style="top: 350px; height: 150px;"><strong>自然之窗</strong>07:00 卡爾巴里</div>
-        <div class="cal-event evt-road" style="top: 575px; height: 50px;"><strong>赫特潟湖 粉紅湖</strong>11:30 拍照</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Port Gregory</strong>簡易午餐 / 點心</div>
-        <div class="cal-event evt-road" style="top: 725px; height: 150px;"><strong>南下自駕</strong>往塞凡提斯</div>
-        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Lobster Shack</strong>18:00 龍蝦大餐</div>
+        <div class="cal-event evt-water" style="top: 400px; height: 200px;"><strong>Navy Pier 水肺</strong>08:00 - 12:00</div>
+        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Blue Lips 炸魚</strong>快速午餐</div>
+        <div class="cal-event evt-road" style="top: 700px; height: 125px;"><strong>開普嶺國家公園</strong>14:00 燈塔海岸</div>
+        <div class="cal-event evt-city" style="top: 850px; height: 75px;"><strong>Whalers 晚餐</strong>17:00</div>
       </div>
 
       <!-- Day 8 (5/1) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-road" style="top: 450px; height: 125px;"><strong>尖峰石陣</strong>09:00 - 11:30</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Endeavour Tavern</strong>12:30 蘭斯林午餐</div>
-        <div class="cal-event evt-road" style="top: 675px; height: 100px;"><strong>蘭斯林滑沙</strong>13:30</div>
-        <div class="cal-event evt-road" style="top: 775px; height: 100px;"><strong>抵達伯斯還車</strong>15:30 出發</div>
-        <div class="cal-event evt-city" style="top: 950px; height: 75px;"><strong>北橋區晚餐</strong>19:00 市區異國料理</div>
+        <div class="cal-event evt-water" style="top: 375px; height: 425px;"><strong>鯨鯊共游團</strong>07:30 集合<br>全日出海 (含午餐)</div>
+        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>Mantaray's 晚餐</strong>18:00 海鮮</div>
       </div>
 
       <!-- Day 9 (5/2) -->
       <div class="cal-day-col">
-        <div class="cal-event evt-flight" style="top: 425px; height: 50px;"><strong>搭渡輪</strong>08:30 往羅特尼斯島</div>
-        <div class="cal-event evt-water" style="top: 475px; height: 125px;"><strong>The Basin浮潛</strong>09:30 單車跳島</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 50px;"><strong>Rottnest Bakery</strong>12:30 知名烘焙坊</div>
-        <div class="cal-event evt-road" style="top: 675px; height: 150px;"><strong>尋找 Quokka</strong>13:30 島上探險</div>
-        <div class="cal-event evt-flight" style="top: 825px; height: 50px;"><strong>搭渡輪返程</strong>16:30 回弗里曼特爾</div>
-        <div class="cal-event evt-city" style="top: 925px; height: 75px;"><strong>Cicerello's 晚餐</strong>18:30 港邊炸魚薯條</div>
+        <div class="cal-event evt-city" style="top: 450px; height: 125px;"><strong>鎮上休閒採買</strong>09:00 - 11:30</div>
+        <div class="cal-event evt-city" style="top: 600px; height: 50px;"><strong>早午餐</strong>12:00</div>
+        <div class="cal-event evt-road" style="top: 675px; height: 50px;"><strong>機場還車</strong>13:30 抵達 LEA</div>
+        <div class="cal-event evt-flight" style="top: 750px; height: 125px;"><strong>澳航國內線</strong>15:15 - 17:05</div>
+        <div class="cal-event evt-city" style="top: 900px; height: 75px;"><strong>北橋區晚餐</strong>18:00 伯斯市區</div>
       </div>
 
       <!-- Day 10 (5/3) -->
       <div class="cal-day-col">
         <div class="cal-event evt-city" style="top: 475px; height: 125px;"><strong>國王公園</strong>09:30 俯瞰市區</div>
-        <div class="cal-event evt-city" style="top: 625px; height: 75px;"><strong>伊麗莎白碼頭午餐</strong>12:30 碼頭景觀餐廳</div>
-        <div class="cal-event evt-city" style="top: 700px; height: 200px;"><strong>CBD 採買伴手禮</strong>14:00 逛兩大超市</div>
-        <div class="cal-event evt-flight" style="top: 975px; height: 100px;"><strong>抵達機場報到</strong>19:30 (晚餐於機場或附近)</div>
+        <div class="cal-event evt-city" style="top: 625px; height: 75px;"><strong>伊麗莎白碼頭午餐</strong>12:30 景觀餐廳</div>
+        <div class="cal-event evt-city" style="top: 700px; height: 200px;"><strong>CBD 採買伴手禮</strong>14:00 兩大超市</div>
+        <div class="cal-event evt-flight" style="top: 975px; height: 100px;"><strong>抵達機場報到</strong>19:30</div>
         <div class="cal-event evt-flight" style="top: 1115px; height: 85px;"><strong>酷航返台</strong>22:20 起飛</div>
       </div>
     </div>
   </div>
 
-  <!-- ================= 2. 每日行程與詳細餐飲 ================= -->
+  <!-- ================= 3. 完整行程與餐飲 ================= -->
   <div id="list" class="tab-content list-view">
     
     <div class="list-card">
@@ -382,7 +480,7 @@
       <div class="list-content">
         <h3>快閃新加坡鳥園</h3>
         <div class="timeline-row"><div class="time-tag">01:35 - 06:00</div><div class="event-desc"><strong>台北飛往新加坡</strong><span>搭乘酷航紅眼班機。06:40 E-Gate 快速通關。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">07:00</div><div class="event-desc"><strong>早餐</strong><span class="event-meal">📍 亞坤咖椰吐司 Ya Kun Kaya Toast (機場或市區分店)</span></div></div>
+        <div class="timeline-row"><div class="time-tag">07:00</div><div class="event-desc"><strong>早餐</strong><span class="event-meal">📍 亞坤咖椰吐司 Ya Kun Kaya Toast</span></div></div>
         <div class="timeline-row"><div class="time-tag">08:30 - 12:30</div><div class="event-desc"><strong>Bird Paradise 飛禽公園</strong><span>搭計程車直奔園區，體驗非洲之心樹冠吊橋。</span></div></div>
         <div class="timeline-row"><div class="time-tag">13:30</div><div class="event-desc"><strong>午餐 ＆ 星耀樟宜</strong><span class="event-meal">📍 Shake Shack 或 松發肉骨茶 (星耀樟宜內)</span></div></div>
         <div class="timeline-row"><div class="time-tag">15:55 - 21:05</div><div class="event-desc"><strong>新加坡飛往伯斯</strong><span>降落西澳，搭車進飯店補眠。</span></div></div>
@@ -392,109 +490,110 @@
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 2</span><span class="date">4/25</span><span class="weekday">Sun.</span></div>
       <div class="list-content">
-        <h3>空降寧格魯礁與物資採買</h3>
-        <div class="timeline-row"><div class="time-tag">08:00 - 10:00</div><div class="event-desc"><strong>伯斯飛往 Exmouth</strong><span>搭乘澳航抵達 Learmonth (LEA) 機場並取車。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">11:00</div><div class="event-desc"><strong>鎮上採買</strong><span>前往 IGA 超市購買大量飲用水及明天出海用的零食。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:00</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Whalers Restaurant (Exmouth 鎮上高人氣餐廳)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">14:00 - 16:30</div><div class="event-desc"><strong>綠松石灣 (Turquoise Bay)</strong><span>開普嶺國家公園內岸潛，隨洋流放漂。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:30</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Froth Craft Brewery (手工啤酒與西式排餐)</span></div></div>
+        <h3>公路旅行啟程與外星奇岩</h3>
+        <div class="timeline-row"><div class="time-tag">09:00</div><div class="event-desc"><strong>市區取車與採買</strong><span>領取休旅車，前往超市補給長途公路必備物資與水。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">11:00 - 14:00</div><div class="event-desc"><strong>北上自駕</strong><span>沿著印度洋公路行駛。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">14:00</div><div class="event-desc"><strong>尖峰石陣 Pinnacles</strong><span>駛入南邦國家公園，穿梭於數千座石灰岩柱群。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">16:00</div><div class="event-desc"><strong>抵達 Cervantes 小鎮</strong><span>入住鎮上民宿休息。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Lobster Shack (若關門可改吃 Cervantes Bar & Bistro)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 3</span><span class="date">4/26</span><span class="weekday">Mon.</span></div>
       <div class="list-content">
-        <h3>解鎖人生成就：野生鯨鯊共游</h3>
-        <div class="timeline-row"><div class="time-tag">07:30 - 16:00</div><div class="event-desc"><strong>Ningaloo Reef 出海團</strong><span>接駁車於飯店接送。整天在偵察機引導下與鯨鯊游泳。</span><span class="event-meal">📍 午餐：船家提供 Buffet 輕食</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Mantaray's (度假村內海鮮餐廳，犒賞自己)</span></div></div>
+        <h3>夢幻粉紅湖與海蝕懸崖</h3>
+        <div class="timeline-row"><div class="time-tag">09:00 - 13:00</div><div class="event-desc"><strong>持續北上</strong><span>途經大鎮 Geraldton。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">13:00</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Geraldton 市區速食或咖啡廳</span></div></div>
+        <div class="timeline-row"><div class="time-tag">14:30</div><div class="event-desc"><strong>赫特潟湖 粉紅湖</strong><span>正午過後陽光充足，湖水呈現如草莓牛奶般的飽和粉色。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">17:00</div><div class="event-desc"><strong>卡爾巴里海岸懸崖</strong><span>抵達 Kalbarri 鎮，前往 Red Bluff 步道觀賞印度洋日落。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">19:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Finlay's Kalbarri (知名露天海鮮 BBQ)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 4</span><span class="date">4/27</span><span class="weekday">Tue.</span></div>
       <div class="list-content">
-        <h3>世界級碼頭水肺與南下啟程</h3>
-        <div class="timeline-row"><div class="time-tag">08:00 - 12:00</div><div class="event-desc"><strong>Navy Pier 潛水</strong><span>全球十大岸潛點。水肺結束後開始「無飛行純陸地」行程。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Blue Lips Fish & Chips (快速解決準備開車)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">14:30 - 16:00</div><div class="event-desc"><strong>自駕前往 Coral Bay</strong><span>約 1.5 小時車程，抵達寧靜的珊瑚灣。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Bill's Bar (氣氛絕佳的戶外酒吧)</span></div></div>
+        <h3>紅土峽谷與世界遺產</h3>
+        <div class="timeline-row"><div class="time-tag">07:00</div><div class="event-desc"><strong>卡爾巴里國家公園</strong><span>趁早晨涼爽前往「自然之窗 (Nature's Window)」與天空步道。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">10:30 - 15:30</div><div class="event-desc"><strong>自駕前往鯊魚灣</strong><span>長途路段，途經 Billabong 休息站。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">13:00</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Billabong Roadhouse 點用漢堡或熱狗</span></div></div>
+        <div class="timeline-row"><div class="time-tag">16:00</div><div class="event-desc"><strong>貝殼沙灘 Shell Beach</strong><span>整片海灘由純白微小貝殼組成，世界遺產景觀。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:30</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Monkey Mia 度假村內餐廳 (Boughshed)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 5</span><span class="date">4/28</span><span class="weekday">Wed.</span></div>
       <div class="list-content">
-        <h3>荒漠公路長征</h3>
-        <div class="timeline-row"><div class="time-tag">08:30 - 10:30</div><div class="event-desc"><strong>珊瑚灣沙灘浮潛</strong><span>踏出沙灘即可看到珊瑚群與小鯊魚。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">11:00</div><div class="event-desc"><strong>午餐預備</strong><span class="event-meal">📍 Coral Resort Bakery (買好澳式肉派帶上車吃)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">11:30 - 17:30</div><div class="event-desc"><strong>自駕往猴子米亞</strong><span>途經 Minilya Roadhouse 加油休息，傍晚抵達 Shark Bay。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:30</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Boughshed Restaurant (Monkey Mia 度假村內)</span></div></div>
+        <h3>野生海豚與寧靜海灣</h3>
+        <div class="timeline-row"><div class="time-tag">07:30 - 09:30</div><div class="event-desc"><strong>野生海豚互動</strong><span>於 Monkey Mia 沙灘由保育員引導，近距離觀察野生寬吻海豚。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">10:00 - 15:30</div><div class="event-desc"><strong>自駕前往 Coral Bay</strong><span>沿著西北公路駛入寧格魯海岸區。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">13:00</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Carnarvon 小鎮補給與簡單用餐</span></div></div>
+        <div class="timeline-row"><div class="time-tag">16:00</div><div class="event-desc"><strong>抵達珊瑚灣</strong><span>鎮上極小且步行可達，沙灘看夕陽放鬆。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Bill's Bar (氣氛絕佳的戶外酒吧)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 6</span><span class="date">4/29</span><span class="weekday">Thu.</span></div>
       <div class="list-content">
-        <h3>野生海豚與紅土懸崖</h3>
-        <div class="timeline-row"><div class="time-tag">07:30 - 09:30</div><div class="event-desc"><strong>野生海豚互動</strong><span>在 Monkey Mia 沙灘由保育員引導近距離觀察寬吻海豚。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">10:00</div><div class="event-desc"><strong>早午餐</strong><span class="event-meal">📍 度假村附設咖啡廳簡單用餐後出發</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Billabong Roadhouse (公路休息站點漢堡/咖啡)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">15:00 - 18:00</div><div class="event-desc"><strong>卡爾巴里海岸懸崖</strong><span>Red Bluff 步道觀賞壯闊的印度洋海蝕地形與日落。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Finlay's Kalbarri (當地最著名露天海鮮 BBQ)</span></div></div>
+        <h3>淺灘珊瑚與洋流漂浮</h3>
+        <div class="timeline-row"><div class="time-tag">09:00 - 11:00</div><div class="event-desc"><strong>珊瑚灣沙灘浮潛</strong><span>踏出沙灘即可看見大片珊瑚礁與海龜。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">11:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Coral Resort Bakery 買好澳式肉派帶上車吃</span></div></div>
+        <div class="timeline-row"><div class="time-tag">13:00 - 14:30</div><div class="event-desc"><strong>自駕前往 Exmouth</strong><span>短程自駕，進入西北大本營。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">15:00 - 17:00</div><div class="event-desc"><strong>綠松石灣 (Turquoise Bay)</strong><span>開普嶺國家公園內絕美岸潛，順著洋流放漂。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Froth Craft Brewery (鎮上手工啤酒與西式排餐)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 7</span><span class="date">4/30</span><span class="weekday">Fri.</span></div>
       <div class="list-content">
-        <h3>自然之窗與夢幻粉紅湖</h3>
-        <div class="timeline-row"><div class="time-tag">07:00 - 10:30</div><div class="event-desc"><strong>卡爾巴里國家公園</strong><span>趁早晨不熱時拍攝「自然之窗 (Nature's Window)」與天空步道。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">11:30</div><div class="event-desc"><strong>赫特潟湖 粉紅湖</strong><span>正午陽光直射時粉色最飽和，停留拍照。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Port Gregory Caravan Park 雜貨店簡單買派，或自備零食</span></div></div>
-        <div class="timeline-row"><div class="time-tag">14:30 - 17:30</div><div class="event-desc"><strong>自駕往塞凡提斯</strong><span>繼續南下前往龍蝦小鎮 Cervantes。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Lobster Shack (雖然著名但營業時間早，若關門可改吃 Cervantes Bar & Bistro)</span></div></div>
+        <h3>世界級碼頭水肺</h3>
+        <div class="timeline-row"><div class="time-tag">08:00 - 12:00</div><div class="event-desc"><strong>Navy Pier 潛水</strong><span>全球十大岸潛點。橋墩下為大型魚群聚集地。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Blue Lips Fish & Chips 快速解決</span></div></div>
+        <div class="timeline-row"><div class="time-tag">14:00 - 16:30</div><div class="event-desc"><strong>開普嶺國家公園</strong><span>走訪 Vlamingh Head 燈塔眺望印度洋。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">17:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Whalers Restaurant</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 8</span><span class="date">5/01</span><span class="weekday">Sat.</span></div>
       <div class="list-content">
-        <h3>外星沙丘與重返都會</h3>
-        <div class="timeline-row"><div class="time-tag">09:00 - 11:30</div><div class="event-desc"><strong>尖峰石陣 Pinnacles</strong><span>南邦國家公園內，自駕穿梭黃色石灰岩柱荒原。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Lancelin Endeavour Tavern (面海酒吧吃炸物/披薩)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">13:30</div><div class="event-desc"><strong>蘭斯林滑沙</strong><span>租借滑沙板在巨大白沙丘上衝刺。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">15:30 - 18:00</div><div class="event-desc"><strong>抵達伯斯市區</strong><span>回到文明世界，市區還車並辦理飯店 Check-in。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">19:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 北橋區 Northbridge (多國料理與亞洲菜任選)</span></div></div>
+        <h3>解鎖人生成就：野生鯨鯊共游</h3>
+        <div class="timeline-row"><div class="time-tag">07:30 - 16:00</div><div class="event-desc"><strong>Ningaloo Reef 出海團</strong><span>整天在偵察機引導下與鯨鯊並肩游泳。</span><span class="event-meal">📍 午餐：船家提供 Buffet 輕食</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Mantaray's (度假村內海鮮餐廳，犒賞自己)</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 9</span><span class="date">5/02</span><span class="weekday">Sun.</span></div>
       <div class="list-content">
-        <h3>單車跳島尋找微笑袋鼠</h3>
-        <div class="timeline-row"><div class="time-tag">08:30</div><div class="event-desc"><strong>搭乘渡輪</strong><span>從伯斯出發前往羅特尼斯島 (Rottnest Island)。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">09:30 - 12:00</div><div class="event-desc"><strong>單車環島與浮潛</strong><span>The Basin 或 Little Salmon Bay 清澈水域浮潛。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 Rottnest Bakery (島上排隊名店) 或 Dome Cafe</span></div></div>
-        <div class="timeline-row"><div class="time-tag">13:30 - 16:00</div><div class="event-desc"><strong>尋找 Quokka</strong><span>在樹林與商店街周邊尋找野生短尾矮袋鼠自拍。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">18:30</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 Cicerello's Fremantle (返回弗里曼特爾吃百年魚薯條)</span></div></div>
+        <h3>滿載回歸伯斯</h3>
+        <div class="timeline-row"><div class="time-tag">09:00 - 12:00</div><div class="event-desc"><strong>鎮上休閒採買</strong><span>Exmouth 鎮上購買紀念品並整理行李。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">12:00</div><div class="event-desc"><strong>早午餐</strong><span class="event-meal">📍 鎮上咖啡廳 (如 The Social Society)</span></div></div>
+        <div class="timeline-row"><div class="time-tag">13:30</div><div class="event-desc"><strong>抵達 Learmonth 機場</strong><span>於機場辦理異地還車手續。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">15:15 - 17:05</div><div class="event-desc"><strong>澳航飛往伯斯</strong><span>搭乘國內線班機返回都會區。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">18:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 伯斯北橋區 (Northbridge) 異國料理或亞洲菜</span></div></div>
       </div>
     </div>
 
     <div class="list-card">
       <div class="list-date-panel"><span class="day-num">DAY 10</span><span class="date">5/03</span><span class="weekday">Mon.</span></div>
       <div class="list-content">
-        <h3>市區漫遊與滿載賦歸</h3>
+        <h3>都會採買與深夜歸國</h3>
         <div class="timeline-row"><div class="time-tag">09:30</div><div class="event-desc"><strong>國王公園 Kings Park</strong><span>俯瞰天鵝河與伯斯高樓天際線，草地散步。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 伊麗莎白碼頭周邊餐廳 (如 The Oyster Bar)</span></div></div>
-        <div class="timeline-row"><div class="time-tag">14:00 - 17:00</div><div class="event-desc"><strong>CBD 超市採買</strong><span>前往 Woolworths 或 Coles 爆買袋鼠餅乾、TimTam 與保健食品。</span></div></div>
-        <div class="timeline-row"><div class="time-tag">19:00</div><div class="event-desc"><strong>晚餐</strong><span class="event-meal">📍 機場附近或市區簡單用餐</span></div></div>
-        <div class="timeline-row"><div class="time-tag">19:30</div><div class="event-desc"><strong>機場報到</strong><span>前往 PER 伯斯機場辦理登機，22:20 酷航起飛。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">12:30</div><div class="event-desc"><strong>午餐</strong><span class="event-meal">📍 伊麗莎白碼頭周邊景觀餐廳 (如 The Oyster Bar)</span></div></div>
+        <div class="timeline-row"><div class="time-tag">14:00 - 17:00</div><div class="event-desc"><strong>CBD 伴手禮採買</strong><span>前往 Woolworths 或 Coles 採購袋鼠餅乾、TimTam 與保健食品。</span></div></div>
+        <div class="timeline-row"><div class="time-tag">19:30</div><div class="event-desc"><strong>抵達機場報到</strong><span>前往 PER 伯斯機場辦理登機手續。</span><span class="event-meal">📍 晚餐：市區提早吃或機場內用餐</span></div></div>
+        <div class="timeline-row"><div class="time-tag">22:20</div><div class="event-desc"><strong>酷航返台</strong><span>起飛，隔日抵達台灣。</span></div></div>
       </div>
     </div>
 
   </div>
 
-  <!-- ================= 3. 預算評估 ================= -->
+  <!-- ================= 4. 預算估算 ================= -->
   <div id="budget" class="tab-content">
     <div class="info-card">
       <h2>雙人預算評估 (台幣)</h2>
@@ -503,19 +602,19 @@
       <table class="budget-table">
         <thead><tr><th>項目類別</th><th>內容說明</th><th>預估金額</th></tr></thead>
         <tbody>
-          <tr><td>國際機票</td><td>酷航 (含20kg行李) 台北-伯斯來回</td><td>NT$ 32,000</td></tr>
-          <tr><td>國內機票</td><td>澳航 Qantas (伯斯 → Exmouth 單程)</td><td>NT$ 15,000</td></tr>
+          <tr><td>國際機票</td><td>酷航 (含 20kg 行李) 台北-伯斯來回</td><td>NT$ 34,176</td></tr>
+          <tr><td>國內機票</td><td>澳航 Qantas (LEA → PER 單程)</td><td>NT$ 19,546</td></tr>
           <tr><td>租車與交通</td><td>8天休旅車 + 異地還車費 + 荒漠油資</td><td>NT$ 38,000</td></tr>
           <tr><td>活動行程</td><td>鯨鯊一日遊 + Navy Pier 水肺深潛</td><td>NT$ 30,000</td></tr>
           <tr><td>住宿費用</td><td>9 晚 (平均每晚 NT$3,500 - $4,500)</td><td>NT$ 36,000</td></tr>
           <tr><td>餐飲與雜支</td><td>超市自煮 + 外食 + 國家公園門票 + 新加坡鳥園</td><td>NT$ 25,000</td></tr>
         </tbody>
       </table>
-      <div class="total-row">Total: <strong>NT$ 176,000</strong></div>
+      <div class="total-row">Total: <strong>NT$ 182,722</strong></div>
     </div>
   </div>
 
-  <!-- ================= 4. 注意事項 ================= -->
+  <!-- ================= 5. 行前準備 ================= -->
   <div id="notes" class="tab-content">
     <div class="grid-2">
       <div class="info-card">
@@ -541,7 +640,6 @@
   </div>
 
   <script>
-    // 加入了 event 參數傳遞，修正點擊子元素可能導致的樣式錯誤問題
     function switchTab(e, tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
