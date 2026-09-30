@@ -3,684 +3,600 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>西澳壯遊旅程手冊 2027 ｜ Ningaloo Reef & Coral Coast</title>
+  <title>西澳陽光壯遊 ｜ 10天海陸企劃</title>
   <style>
+    /* --- 全局與澳洲文青風配色 --- */
     :root {
-      --primary: #007791;
-      --primary-light: #e0f2f7;
-      --secondary: #d97736;
-      --accent: #2a9d8f;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --bg-color: #FDFBF7; /* 溫暖的陽光白沙色 */
+      --text-main: #3E3A39;
+      --text-muted: #8A8583;
+      --accent-red: #D26952; /* 澳洲紅土地色 */
+      --accent-yellow: #ECA43D; /* 陽光黃 */
+      --accent-blue: #528AA5; /* 印度洋藍 */
+      --border-color: #E6E1DC;
+      
+      /* 行事曆方塊顏色 */
+      --cal-flight: #F5EAE1;
+      --cal-flight-txt: #A8653B;
+      --cal-water: #E1EFF5;
+      --cal-water-txt: #3B728D;
+      --cal-road: #F9EBE8;
+      --cal-road-txt: #B35843;
+      --cal-city: #EAF2E3;
+      --cal-city-txt: #588040;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-color);
       color: var(--text-main);
+      font-family: "Noto Serif TC", "Songti TC", "Heiti TC", -apple-system, sans-serif;
       line-height: 1.6;
-      padding-bottom: 50px;
-    }
-
-    header {
-      background: linear-gradient(135deg, #005f73, #0a9396);
-      color: #fff;
       padding: 40px 20px;
-      text-align: center;
-      box-shadow: var(--shadow);
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      letter-spacing: 0.5px;
-    }
-
-    header p {
-      color: #e0f2f1;
-      font-size: 1rem;
-    }
-
-    /* 導航分頁 */
-    nav {
-      display: flex;
-      justify-content: center;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    nav button {
-      padding: 16px 24px;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border: none;
-      background: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border-bottom: 3px solid transparent;
-    }
-
-    nav button:hover {
-      color: var(--primary);
-    }
-
-    nav button.active {
-      color: var(--primary);
-      border-bottom: 3px solid var(--primary);
-    }
-
-    .container {
-      max-width: 1080px;
-      margin: 30px auto;
-      padding: 0 16px;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 行事曆介面 */
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-    }
-
-    .cal-day-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s;
-    }
-
-    .cal-day-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .cal-date {
+    /* --- 頂部導航與標題 --- */
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 2px solid var(--primary-light);
-      padding-bottom: 8px;
-      margin-bottom: 12px;
-    }
-
-    .cal-date .day-num {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .cal-date .weekday {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .cal-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 999px;
-      margin-bottom: 8px;
-      width: fit-content;
-    }
-
-    .tag-flight { background: #fee2e2; color: #b91c1c; }
-    .tag-dive { background: #e0f2fe; color: #0369a1; }
-    .tag-road { background: #fef3c7; color: #b45309; }
-    .tag-city { background: #dcfce7; color: #15803d; }
-
-    .cal-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .cal-loc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* 完整行程清單 */
-    .timeline {
-      position: relative;
-      padding-left: 24px;
-      border-left: 2px solid var(--border);
-      margin-left: 12px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 32px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -31px;
-      top: 6px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--primary);
-      border: 2px solid #fff;
-    }
-
-    .itinerary-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .itinerary-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      gap: 8px;
-    }
-
-    .itinerary-header h3 {
-      font-size: 1.2rem;
-      color: var(--text-main);
-    }
-
-    .meta-badge {
-      font-size: 0.85rem;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-
-    .itinerary-body ul {
-      list-style-type: none;
-      margin-top: 10px;
-    }
-
-    .itinerary-body li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 8px;
-      color: #334155;
-    }
-
-    .itinerary-body li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-size: 1.2rem;
-    }
-
-    .highlight-box {
-      margin-top: 12px;
-      background: #f1f5f9;
-      border-left: 4px solid var(--accent);
-      padding: 10px 14px;
-      font-size: 0.88rem;
-      border-radius: 0 6px 6px 0;
-    }
-
-    /* 實用指南與清單 */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
-
-    .info-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 15px;
       margin-bottom: 20px;
     }
 
-    .info-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 14px;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 2px;
     }
 
-    .check-item {
+    .header span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-family: sans-serif;
+    }
+
+    .intro {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    /* --- 切換按鈕 --- */
+    .tabs {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid #f1f5f9;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 20px;
       cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      font-family: sans-serif;
     }
 
-    .check-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--primary);
+    .tab-btn.active {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    /* --- Apple Calendar 風格行事曆 UI --- */
+    .calendar-view {
+      display: none;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      overflow-x: auto;
+      font-family: -apple-system, sans-serif; /* 科技感無襯線體 */
+    }
+
+    .calendar-view.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .cal-header-row {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      background: #FAFAFA;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .cal-time-col {
+      width: 60px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .cal-day-header {
+      width: 160px;
+      flex-shrink: 0;
+      text-align: center;
+      padding: 12px 0;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .cal-day-header .dow {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .cal-day-header .date {
+      font-size: 1.4rem;
+      color: var(--text-main);
+      font-weight: 400;
+    }
+
+    /* 網格區 */
+    .cal-grid {
+      display: flex;
+      position: relative;
+      /* 網格背景：每 50px 一條橫線代表一小時 */
+      background-image: linear-gradient(to bottom, #F0F0F0 1px, transparent 1px);
+      background-size: 100% 50px;
+      height: 1200px; /* 24小時 * 50px */
+    }
+
+    .cal-time-labels {
+      width: 60px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-color);
+      background: #fff;
+    }
+
+    .time-label {
+      height: 50px;
+      text-align: right;
+      padding-right: 8px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      position: relative;
+      top: -7px;
+    }
+
+    .cal-day-col {
+      width: 160px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    /* 事件區塊 (Event Blocks) */
+    .cal-event {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      border-radius: 6px;
+      padding: 4px 6px;
+      font-size: 0.75rem;
+      line-height: 1.2;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .cal-event strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.8rem;
+    }
+
+    /* 事件顏色分類 */
+    .evt-flight { background: var(--cal-flight); color: var(--cal-flight-txt); border-left: 3px solid var(--cal-flight-txt); }
+    .evt-water { background: var(--cal-water); color: var(--cal-water-txt); border-left: 3px solid var(--cal-water-txt); }
+    .evt-road { background: var(--cal-road); color: var(--cal-road-txt); border-left: 3px solid var(--cal-road-txt); }
+    .evt-city { background: var(--cal-city); color: var(--cal-city-txt); border-left: 3px solid var(--cal-city-txt); }
+
+
+    /* --- 文青列表風 UI (參考截圖) --- */
+    .list-view {
+      display: none;
+    }
+
+    .list-view.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .day-row {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      padding: 40px 0;
+    }
+
+    .day-left {
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .day-left .day-num {
+      font-size: 0.8rem;
+      color: var(--accent-red);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+      font-family: sans-serif;
+    }
+
+    .day-left .date {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .day-left .weekday {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .day-right {
+      flex: 1;
+      padding-left: 20px;
+    }
+
+    .day-right .day-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: sans-serif;
+      font-size: 0.9rem;
+    }
+
+    .timeline-table td {
+      padding: 10px 0;
+      vertical-align: top;
+    }
+
+    .time-col {
+      width: 110px;
+      color: var(--text-muted);
+    }
+
+    .event-col strong {
+      color: var(--text-main);
+      font-weight: 600;
+      margin-right: 10px;
+    }
+
+    .event-col span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* 重點提示方塊 (與截圖風格一致) */
+    .note-box {
+      margin-top: 25px;
+      background: #F9F5F0;
+      border-left: 4px solid var(--accent-yellow);
+      padding: 15px 20px;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+
+    .note-box span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .day-row { flex-direction: column; padding: 25px 0; }
+      .day-right { padding-left: 0; margin-top: 15px; }
+      .time-col { width: 90px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>西澳世界級珊瑚礁與荒漠壯遊</h1>
-    <p>2027/04/24 (六) - 2027/05/04 (二) ｜ 10 天 10 夜海陸極致企劃</p>
-  </header>
+  <div class="header">
+    <h1>十天怎麼走</h1>
+    <span>全程不走回頭路 ｜ 海陸極致</span>
+  </div>
 
-  <nav>
-    <button class="active" onclick="switchTab('calendar')">📅 行事曆總覽</button>
-    <button onclick="switchTab('itinerary')">📍 每日完整行程</button>
-    <button onclick="switchTab('checklist')">🧳 裝備與行前指南</button>
-  </nav>
+  <p class="intro">
+    從寧格魯的蔚藍珊瑚礁，一路自駕向南穿越紅土大峽谷與粉紅湖。不僅滿足水肺與鯨鯊的嚮往，更在新加坡轉機時快閃鳥園。行程節奏緊湊卻不失餘裕。
+  </p>
 
-  <div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('calendar')">🗓 區塊行事曆 (Apple 風格)</button>
+    <button class="tab-btn" onclick="switchTab('list')">📝 文青行程表 (列表風格)</button>
+  </div>
+
+  <!-- ================= Apple 行事曆 UI ================= -->
+  <div id="calendar" class="calendar-view active">
+    <div class="cal-header-row">
+      <div class="cal-time-col"></div>
+      <div class="cal-day-header"><div class="dow">Sat</div><div class="date">4/24</div></div>
+      <div class="cal-day-header"><div class="dow">Sun</div><div class="date">4/25</div></div>
+      <div class="cal-day-header"><div class="dow">Mon</div><div class="date">4/26</div></div>
+      <div class="cal-day-header"><div class="dow">Tue</div><div class="date">4/27</div></div>
+      <div class="cal-day-header"><div class="dow">Wed</div><div class="date">4/28</div></div>
+      <div class="cal-day-header"><div class="dow">Thu</div><div class="date">4/29</div></div>
+      <div class="cal-day-header"><div class="dow">Fri</div><div class="date">4/30</div></div>
+      <div class="cal-day-header"><div class="dow">Sat</div><div class="date">5/01</div></div>
+      <div class="cal-day-header"><div class="dow">Sun</div><div class="date">5/02</div></div>
+      <div class="cal-day-header"><div class="dow">Mon</div><div class="date">5/03</div></div>
+    </div>
+
+    <div class="cal-grid">
+      <!-- 左側時間軸 -->
+      <div class="cal-time-labels">
+        <div class="time-label">00:00</div><div class="time-label">01:00</div>
+        <div class="time-label">02:00</div><div class="time-label">03:00</div>
+        <div class="time-label">04:00</div><div class="time-label">05:00</div>
+        <div class="time-label">06:00</div><div class="time-label">07:00</div>
+        <div class="time-label">08:00</div><div class="time-label">09:00</div>
+        <div class="time-label">10:00</div><div class="time-label">11:00</div>
+        <div class="time-label">12:00</div><div class="time-label">13:00</div>
+        <div class="time-label">14:00</div><div class="time-label">15:00</div>
+        <div class="time-label">16:00</div><div class="time-label">17:00</div>
+        <div class="time-label">18:00</div><div class="time-label">19:00</div>
+        <div class="time-label">20:00</div><div class="time-label">21:00</div>
+        <div class="time-label">22:00</div><div class="time-label">23:00</div>
+      </div>
+
+      <!-- Day 1 (4/24) -->
+      <!-- 換算公式: top = 開始小時數 * 50px ; height = 持續小時數 * 50px -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-flight" style="top: 75px; height: 225px;">
+          <strong>酷航飛往新加坡</strong> 01:35 - 06:00
+        </div>
+        <div class="cal-event evt-city" style="top: 325px; height: 75px;">
+          <strong>入境與早餐</strong> 06:30 - 08:00
+        </div>
+        <div class="cal-event evt-city" style="top: 425px; height: 200px;">
+          <strong>Bird Paradise 鳥園</strong> 08:30 - 12:30
+        </div>
+        <div class="cal-event evt-city" style="top: 650px; height: 75px;">
+          <strong>星耀樟宜瀑布</strong> 13:00 - 14:30
+        </div>
+        <div class="cal-event evt-flight" style="top: 795px; height: 255px;">
+          <strong>酷航飛往伯斯</strong> 15:55 - 21:05
+        </div>
+      </div>
+
+      <!-- Day 2 (4/25) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-flight" style="top: 400px; height: 100px;">
+          <strong>國內線飛 Exmouth</strong> 08:00 - 10:00
+        </div>
+        <div class="cal-event evt-road" style="top: 525px; height: 100px;">
+          <strong>機場取車 / 採買</strong> 10:30 - 12:30
+        </div>
+        <div class="cal-event evt-water" style="top: 675px; height: 175px;">
+          <strong>綠松石灣浮潛</strong> 開普嶺國家公園暖身
+        </div>
+        <div class="cal-event evt-city" style="top: 900px; height: 100px;">
+          <strong>晚餐與入住民宿</strong> Exmouth 鎮上
+        </div>
+      </div>
+
+      <!-- Day 3 (4/26) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-water" style="top: 400px; height: 425px;">
+          <strong>Ningaloo Reef 鯨鯊團</strong> 08:00 - 16:30 <br>全日出海浮潛
+        </div>
+        <div class="cal-event evt-city" style="top: 875px; height: 100px;">
+          <strong>鎮上放鬆與晚餐</strong> 17:30 - 19:30
+        </div>
+      </div>
+
+      <!-- Day 4 (4/27) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-water" style="top: 400px; height: 200px;">
+          <strong>Navy Pier 水肺潛水</strong> 08:00 - 12:00
+        </div>
+        <div class="cal-event evt-road" style="top: 725px; height: 100px;">
+          <strong>自駕往 Coral Bay</strong> 14:30 - 16:30
+        </div>
+        <div class="cal-event evt-water" style="top: 850px; height: 75px;">
+          <strong>沙灘夕陽 / 放空</strong> 17:00 - 18:30
+        </div>
+      </div>
+
+      <!-- Day 5 (4/28) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-water" style="top: 400px; height: 150px;">
+          <strong>珊瑚灣晨間浮潛</strong> 08:00 - 11:00
+        </div>
+        <div class="cal-event evt-road" style="top: 575px; height: 300px;">
+          <strong>長途自駕南下</strong> 11:30 - 17:30<br>前往鯊魚灣
+        </div>
+      </div>
+
+      <!-- Day 6 (4/29) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-water" style="top: 375px; height: 100px;">
+          <strong>Monkey Mia 海豚互動</strong> 07:30 - 09:30
+        </div>
+        <div class="cal-event evt-road" style="top: 500px; height: 200px;">
+          <strong>自駕往卡爾巴里</strong> 10:00 - 14:00
+        </div>
+        <div class="cal-event evt-road" style="top: 750px; height: 150px;">
+          <strong>海岸懸崖看日落</strong> 15:00 - 18:00
+        </div>
+      </div>
+
+      <!-- Day 7 (4/30) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-road" style="top: 350px; height: 175px;">
+          <strong>卡爾巴里國家公園</strong> 07:00 - 10:30<br>自然之窗
+        </div>
+        <div class="cal-event evt-water" style="top: 575px; height: 100px;">
+          <strong>赫特潟湖 粉紅湖</strong> 11:30 - 13:30
+        </div>
+        <div class="cal-event evt-road" style="top: 725px; height: 150px;">
+          <strong>自駕往塞凡提斯</strong> 14:30 - 17:30
+        </div>
+      </div>
+
+      <!-- Day 8 (5/1) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-road" style="top: 450px; height: 125px;">
+          <strong>尖峰石陣 Pinnacles</strong> 09:00 - 11:30
+        </div>
+        <div class="cal-event evt-road" style="top: 625px; height: 100px;">
+          <strong>蘭斯林滑沙</strong> 12:30 - 14:30
+        </div>
+        <div class="cal-event evt-road" style="top: 775px; height: 125px;">
+          <strong>還車與入住伯斯</strong> 15:30 - 18:00
+        </div>
+      </div>
+
+      <!-- Day 9 (5/2) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-water" style="top: 425px; height: 450px;">
+          <strong>羅特尼斯島全日</strong> 08:30 - 17:30<br>單車跳島、尋找 Quokka
+        </div>
+      </div>
+
+      <!-- Day 10 (5/3) -->
+      <div class="cal-day-col">
+        <div class="cal-event evt-city" style="top: 450px; height: 300px;">
+          <strong>市區觀光與採買</strong> 09:00 - 15:00<br>國王公園
+        </div>
+        <div class="cal-event evt-flight" style="top: 975px; height: 100px;">
+          <strong>前往機場報到</strong> 19:30 - 21:30
+        </div>
+        <div class="cal-event evt-flight" style="top: 1115px; height: 85px;">
+          <strong>搭機返台</strong> 22:20 起飛
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= 文青列表風 UI ================= -->
+  <div id="list" class="list-view">
     
-    <!-- 分頁 1: 行事曆介面 -->
-    <div id="calendar" class="tab-content active">
-      <div class="calendar-grid">
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 1 ｜ 4/24</span>
-              <span class="weekday">週六</span>
-            </div>
-            <span class="cal-tag tag-flight">長途飛行 + 轉機</span>
-            <div class="cal-title">新加坡鳥園快閃 ➔ 抵達伯斯</div>
-            <div class="cal-loc">機上 ➔ 新加坡 ➔ 伯斯 (PER)</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：伯斯機場附近</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 2 ｜ 4/25</span>
-              <span class="weekday">週日</span>
-            </div>
-            <span class="cal-tag tag-dive">國內飛航 + 暖身浮潛</span>
-            <div class="cal-title">直飛寧格魯礁門戶 Exmouth</div>
-            <div class="cal-loc">Learmonth 機場取車 ➔ 綠松石灣</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：Exmouth</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 3 ｜ 4/26</span>
-              <span class="weekday">週一</span>
-            </div>
-            <span class="cal-tag tag-dive">全日出海浮潛亮點</span>
-            <div class="cal-title">Ningaloo Reef 鯨鯊共游</div>
-            <div class="cal-loc">全天出海浮潛巡航</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：Exmouth</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 4 ｜ 4/27</span>
-              <span class="weekday">週二</span>
-            </div>
-            <span class="cal-tag tag-dive">晨間水肺潛水</span>
-            <div class="cal-title">Navy Pier 碼頭水肺 ➔ 珊瑚灣</div>
-            <div class="cal-loc">上午潛水 ➔ 自駕 1.5 hr 至 Coral Bay</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：Coral Bay</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 5 ｜ 4/28</span>
-              <span class="weekday">週三</span>
-            </div>
-            <span class="cal-tag tag-road">荒漠海岸公路</span>
-            <div class="cal-title">珊瑚灣海灘浮潛 ➔ 鯊魚灣</div>
-            <div class="cal-loc">自駕約 6 hr ➔ 世界遺產 Monkey Mia</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：Monkey Mia</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 6 ｜ 4/29</span>
-              <span class="weekday">週四</span>
-            </div>
-            <span class="cal-tag tag-road">野生海豚 + 海蝕懸崖</span>
-            <div class="cal-title">猴子米亞晨間海豚 ➔ 卡爾巴里</div>
-            <div class="cal-loc">貝殼沙灘 ➔ 自駕 4 hr ➔ 峽谷海岸崖</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：卡爾巴里 (Kalbarri)</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 7 ｜ 4/30</span>
-              <span class="weekday">週五</span>
-            </div>
-            <span class="cal-tag tag-road">國家公園峽谷 + 粉紅湖</span>
-            <div class="cal-title">自然之窗 ➔ 赫特潟湖粉紅湖</div>
-            <div class="cal-loc">Kalbarri NP ➔ 傑拉爾頓 / 塞凡提斯</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：塞凡提斯或傑拉爾頓</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 8 ｜ 5/01</span>
-              <span class="weekday">週六</span>
-            </div>
-            <span class="cal-tag tag-road">外星沙丘 + 回程伯斯</span>
-            <div class="cal-title">尖峰石陣 ➔ 蘭斯林滑沙 ➔ 伯斯</div>
-            <div class="cal-loc">Pinnacles ➔ 自駕 2.5 hr 返抵市區還車</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：伯斯市區</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 9 ｜ 5/02</span>
-              <span class="weekday">週日</span>
-            </div>
-            <span class="cal-tag tag-city">跳島渡輪放鬆</span>
-            <div class="cal-title">羅特尼斯島環島 ＆ 尋找短尾矮袋鼠</div>
-            <div class="cal-loc">單車環島 ➔ The Basin 浮潛 ➔ Quokka</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">宿：伯斯市區</div>
-        </div>
-
-        <div class="cal-day-card">
-          <div>
-            <div class="cal-date">
-              <span class="day-num">Day 10 ｜ 5/03-04</span>
-              <span class="weekday">週一/二</span>
-            </div>
-            <span class="cal-tag tag-flight">市區休閒 + 返程夜航</span>
-            <div class="cal-title">國王公園野餐 ➔ 搭機返台</div>
-            <div class="cal-loc">伯斯 22:20 起飛 ➔ 新加坡 ➔ 台北</div>
-          </div>
-          <div class="cal-loc" style="margin-top:10px; font-weight:600;">5/4 11:45 抵達台灣</div>
+    <!-- Day 1 -->
+    <div class="day-row">
+      <div class="day-left">
+        <div class="day-num">DAY 1</div>
+        <div class="date">4/24</div>
+        <div class="weekday">週六</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">轉機不留白，快閃新加坡</div>
+        <table class="timeline-table">
+          <tr>
+            <td class="time-col">01:35 → 06:00</td>
+            <td class="event-col"><strong>台北 → 新加坡</strong> <span>酷航 TR873，紅眼省住宿</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">上午</td>
+            <td class="event-col"><strong>Bird Paradise 鳥園</strong> <span>搭車直奔萬禮園區，看巨型非洲天空鳥舍</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">下午</td>
+            <td class="event-col"><strong>星耀樟宜瀑布</strong> <span>回機場吃斑蘭蛋糕、看雨漩渦，準備登機</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">15:55 → 21:05</td>
+            <td class="event-col"><strong>新加坡 → 伯斯</strong> <span>落地西澳，直接進市區飯店補眠</span></td>
+          </tr>
+        </table>
+        
+        <div class="note-box">
+          <span>為什麼擠在同一天？</span>
+          去程轉機長達 10 小時，利用免簽極速通關，直接搭計程車去 9 點開門的新鳥園，時間銜接完美。就算回程只剩 3 小時轉機，去程也已經玩回本了。
         </div>
       </div>
     </div>
 
-    <!-- 分頁 2: 完整每日行程 -->
-    <div id="itinerary" class="tab-content">
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 1 ｜ 4/24 (六) 台北啟程 ➔ 新加坡轉機半日遊 ➔ 伯斯</h3>
-              <span class="meta-badge">轉機時間 9hr 55m</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>01:35 - 06:00</strong> 搭乘酷航 TR873 前往新加坡樟宜機場。</li>
-                <li><strong>06:40 - 07:30</strong> 快速自動通關（E-Gate 入境），隨身行李寄存機場，享用亞坤咖椰吐司早餐。</li>
-                <li><strong>08:15 - 12:30</strong> 搭計程車/Grab 直奔 <strong>Bird Paradise 飛禽公園</strong>（09:00 開園），漫步「非洲之心」樹冠吊橋與「彩鸚谷」。</li>
-                <li><strong>13:00 - 14:15</strong> 返回樟宜機場，欣賞星耀樟宜室內雨漩渦瀑布，採買斑蘭蛋糕後通關出境。</li>
-                <li><strong>15:55 - 21:05</strong> 搭乘 TR16 直飛伯斯，晚間抵達西澳，入住機場周邊旅館養精蓄銳。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 2 ｜ 4/25 (日) 澳航直飛利爾蒙斯 ➔ 開普嶺國家公園暖身</h3>
-              <span class="meta-badge">國內航程 2hr ｜ 自駕 50km</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>上午</strong>：搭乘澳航（Qantas）國內線由伯斯直飛利爾蒙斯機場（Learmonth, LEA）。</li>
-                <li><strong>中午</strong>：航廈櫃檯領取租賃休旅車，前往 Exmouth 鎮上採買補給與確認隔日浮潛行程。</li>
-                <li><strong>下午</strong>：開車進入開普嶺國家公園（Cape Range National Park），前往 <strong>綠松石灣（Turquoise Bay）</strong> 體驗隨洋流漂浮的絕美岸邊浮潛。</li>
-              </ul>
-              <div class="highlight-box">
-                <strong>重要提醒：</strong> 綠松石灣 Drift Loop 水流平穩但請注意出口標記，順著洋流放漂時即可飽覽完整珊瑚群。
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 3 ｜ 4/26 (一) 【亮點一】Ningaloo Reef 全日出海浮潛鯨鯊</h3>
-              <span class="meta-badge">出海一日團</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>全日</strong>：參加世界知名的 <strong>寧格魯礁鯨鯊共游行程</strong>。西澳嚴格保護生態，與鯨鯊接觸採輪流浮潛方式。</li>
-                <li>搭乘配備輕型偵察機引導的專業遊艇，近距離與溫和的海中巨物、魔鬼魚（蝠鱝）與海龜同行。</li>
-                <li>傍晚返回 Exmouth 鎮上，在當地球場或海岸酒吧一邊享用澳式晚餐一邊欣賞夕陽。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 4 ｜ 4/27 (二) 【亮點二】Navy Pier 晨間水肺 ➔ 漫遊 Coral Bay</h3>
-              <span class="meta-badge">水肺潛水 ｜ 自駕約 150km (1.5hr)</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>上午</strong>：參加 <strong>海軍碼頭（Navy Pier）晨間水肺潛水</strong>。此處被列為全球頂級岸潛點，橋墩下聚集巨型石斑、白頂礁鯊與遮天蔽日的魚群風暴。</li>
-                <li><strong>下午</strong>：潛水結束並休息後，啟程向南自駕 1.5 小時抵達悠閒的度假村小鎮 <strong>珊瑚灣（Coral Bay）</strong>。</li>
-                <li>傍晚漫步白沙灘，在完全零光害的海灣仰望南半球壯麗銀河。</li>
-              </ul>
-              <div class="highlight-box">
-                <strong>禁飛安全考量：</strong> 水肺排在 Day 4 早晨，後續 6 天全程皆在陸地公路行駛，完全解除飛行減壓限制！
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 5 ｜ 4/28 (三) 珊瑚灣漫步 ➔ 世界遺產鯊魚灣</h3>
-              <span class="meta-badge">長途自駕約 560km (6hr)</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>清晨</strong>：直接從 Coral Bay 旅館走出沙灘即可進行最後一次礁岩浮潛，海水清澈可見幼鯊在淺灘巡遊。</li>
-                <li><strong>白天</strong>：沿著西北海岸公路（North West Coastal Hwy）自駕南下，中途停靠 Overlander 補給站。</li>
-                <li><strong>下午</strong>：切入鯊魚灣（Shark Bay）世界遺產保護區，參觀哈梅林池（Hamelin Pool）古老疊層石與純白貝殼海灘（Shell Beach）。</li>
-                <li>夜宿 Monkey Mia 度假村。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 6 ｜ 4/29 (四) 猴子米亞海豚體驗 ➔ 卡爾巴里海蝕崖</h3>
-              <span class="meta-badge">自駕約 390km (4hr)</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>07:30 - 09:00</strong> 在 Monkey Mia 棧橋旁的海灘參與數十年歷史的野生寬吻海豚晨間互動體驗。</li>
-                <li><strong>上午</strong>：自駕南下前往卡爾巴里（Kalbarri）。</li>
-                <li><strong>傍晚</strong>：參訪卡爾巴里海岸海蝕地形（Red Bluff 懸崖步道），站在紅砂岩峭壁上俯瞰印度洋波濤巨浪與壯麗日落。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 7 ｜ 4/30 (五) 卡爾巴里大峽谷 ➔ 夢幻粉紅湖 ➔ 塞凡提斯</h3>
-              <span class="meta-badge">自駕約 380km (4.5hr)</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>清晨</strong>：進入卡爾巴里國家公園內陸區，走訪象徵性的 <strong>自然之窗（Nature's Window）</strong> 與懸空觀景台 <strong>天空步道（Kalbarri Skywalk）</strong>。</li>
-                <li><strong>上午</strong>：途經赫特潟湖（Hutt Lagoon / 粉紅湖），此時段日照最充足，湖面呈現如草莓牛奶般的粉嫩色彩。</li>
-                <li><strong>下午</strong>：開往龍蝦小鎮塞凡提斯（Cervantes）入住，享用新鮮岩礁龍蝦。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 8 ｜ 5/01 (六) 尖峰石陣 ➔ 蘭斯林滑沙 ➔ 返抵伯斯</h3>
-              <span class="meta-badge">自駕約 200km (2.5hr)</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>上午</strong>：造訪南邦國家公園（Nambung National Park）的 <strong>尖峰石陣（The Pinnacles）</strong>，開車穿梭在數千座聳立的石灰岩奇石之中。</li>
-                <li><strong>中午</strong>：前往蘭斯林（Lancelin），在巨大的雪白沙丘租借滑沙板體驗俯衝快感。</li>
-                <li><strong>下午</strong>：開回伯斯市區辦理異地還車手續，入住市中心飯店。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 9 ｜ 5/02 (日) 羅特尼斯島單車跳島 ＆ 尋找微笑袋鼠</h3>
-              <span class="meta-badge">渡輪來回</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>08:30</strong> 從伊麗莎白碼頭或弗里曼特爾搭乘高速渡輪前往 <strong>羅特尼斯島（Rottnest Island）</strong>。</li>
-                <li>租借自行車環島巡遊，在 The Basin 與 Little Salmon Bay 享受平靜清澈的溫帶海灣浮潛。</li>
-                <li>隨處尋找島上獨有的野生短尾矮袋鼠（Quokka），近距離拍照自拍。</li>
-                <li>傍晚搭船返回伯斯市區。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="itinerary-card">
-            <div class="itinerary-header">
-              <h3>Day 10-11 ｜ 5/03-04 伯斯市區巡禮 ➔ 深夜啟程 ➔ 返抵國門</h3>
-              <span class="meta-badge">酷航夜航</span>
-            </div>
-            <div class="itinerary-body">
-              <ul>
-                <li><strong>Day 10 (5/3) 白天</strong>：在伯斯國王公園（Kings Park）俯瞰整座城市與天鵝河全景，在伊麗莎白碼頭散步採買伴手禮。</li>
-                <li><strong>19:30</strong> 抵達伯斯機場辦理登機。</li>
-                <li><strong>22:20</strong> 搭乘酷航 TR17 啟程返台（機上過夜）。</li>
-                <li><strong>Day 11 (5/4) 11:45</strong> 於新加坡轉機後順利降落台北桃園機場，平安歸國。</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+    <!-- Day 2 -->
+    <div class="day-row">
+      <div class="day-left">
+        <div class="day-num">DAY 2</div>
+        <div class="date">4/25</div>
+        <div class="weekday">週日</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">空降西北澳，與海接軌</div>
+        <table class="timeline-table">
+          <tr>
+            <td class="time-col">08:00 → 10:00</td>
+            <td class="event-col"><strong>伯斯 → Exmouth</strong> <span>澳航國內線，2 小時直達寧格魯礁門戶</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">午後</td>
+            <td class="event-col"><strong>機場取車 → 鎮上</strong> <span>異地取還方案展開，先去超市採買補給</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">下午</td>
+            <td class="event-col"><strong>開普嶺國家公園</strong> <span>前往綠松石灣 (Turquoise Bay)，體驗隨洋流放漂的絕美岸潛</span></td>
+          </tr>
+        </table>
       </div>
     </div>
 
-    <!-- 分頁 3: 實用指南與清單 -->
-    <div id="checklist" class="tab-content">
-      <div class="grid-2">
-        <div>
-          <div class="info-card">
-            <h3>🤿 潛水與水域裝備清單</h3>
-            <label class="check-item"><input type="checkbox"> 個人面鏡與呼吸管（建議自備合臉型者）</label>
-            <label class="check-item"><input type="checkbox"> 水肺潛水證照（PADI / SSI 電子卡或實體卡）</label>
-            <label class="check-item"><input type="checkbox"> 潛水電腦錶（記錄下水日誌與安全減壓）</label>
-            <label class="check-item"><input type="checkbox"> 潛水長袖防曬衣 / 水母衣（Rash Guard）</label>
-            <label class="check-item"><input type="checkbox"> 水下相機 / GoPro 及原廠防水殼與浮力棒</label>
-            <label class="check-item"><input type="checkbox"> 友善海洋防曬乳（Reef-Safe Sunscreen）</label>
-          </div>
-
-          <div class="info-card">
-            <h3>🚗 荒漠自駕行車守則</h3>
-            <ul>
-              <li style="margin-bottom:8px;"><strong>黃昏與夜間切勿行駛荒漠：</strong> 袋鼠、鴯鶓與大型野生動物於拂曉和傍晚極具活動力，撞擊風險高且保險不理賠。</li>
-              <li style="margin-bottom:8px;"><strong>加油原則：</strong> 只要油量低於半桶，路過小鎮加油站一律加滿，沿途加油站間隔可能長達 150～200 公里。</li>
-              <li style="margin-bottom:8px;"><strong>離線地圖：</strong> 荒漠多數路段無行動網路訊號，出發前務必下載好 Google Maps 離線地圖。</li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <div class="info-card">
-            <h3>📄 必辦文件與入境準備</h3>
-            <label class="check-item"><input type="checkbox"> 澳洲電子旅行簽證（ETA / 透過手機 APP 辦理）</label>
-            <label class="check-item"><input type="checkbox"> 國際駕照（IDP）及台灣本國駕照正本</label>
-            <label class="check-item"><input type="checkbox"> 新加坡電子入境卡（出發前 3 天內線上填報）</label>
-            <label class="check-item"><input type="checkbox"> 租車全險保單與信用卡</label>
-          </div>
-
-          <div class="info-card">
-            <h3>💡 關鍵預訂里程碑</h3>
-            <ul>
-              <li style="margin-bottom:8px;"><strong>鯨鯊出海團：</strong> 4 月為旺季首月，限額嚴格，建議機票確認後立即預訂 Exmouth 船班。</li>
-              <li style="margin-bottom:8px;"><strong>Navy Pier 潛水：</strong> 屬海軍軍事保護區，出團須提前造冊報備身分證件，請先與潛店完成預約。</li>
-              <li style="margin-bottom:8px;"><strong>Bird Paradise 門票：</strong> 先行線上買好 QR code 門票，省去早上 9 點在現場排隊的時間。</li>
-            </ul>
-          </div>
+    <!-- Day 3 -->
+    <div class="day-row">
+      <div class="day-left">
+        <div class="day-num">DAY 3</div>
+        <div class="date">4/26</div>
+        <div class="weekday">週一</div>
+      </div>
+      <div class="day-right">
+        <div class="day-title">重頭戲，深海溫柔巨獸</div>
+        <table class="timeline-table">
+          <tr>
+            <td class="time-col">08:00 → 16:30</td>
+            <td class="event-col"><strong>Ningaloo Reef 鯨鯊共游</strong> <span>搭乘遊艇出海，在偵察機引導下與野生鯨鯊並肩游泳</span></td>
+          </tr>
+          <tr>
+            <td class="time-col">傍晚</td>
+            <td class="event-col"><strong>Exmouth 鎮上放鬆</strong> <span>吹著海風吃炸魚薯條，為隔天的水肺儲備體力</span></td>
+          </tr>
+        </table>
+        
+        <div class="note-box">
+          <span>禁飛期與行程解謎</span>
+          這就是為什麼「先飛上來、再開車下去」是最強走法。Day 4 上午水肺潛水完，接下來 6 天全都在陸地上自駕，徹底避開 18-24 小時的水肺禁飛期！
         </div>
       </div>
     </div>
-
+    
   </div>
 
   <script>
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.calendar-view, .list-view').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
       document.getElementById(tabId).classList.add('active');
       event.target.classList.add('active');
